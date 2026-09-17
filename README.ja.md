@@ -115,7 +115,12 @@ php artisan usephp:compile --check  # CI 用: キャッシュが古ければ失�
   遅延描画が動きます。
 - props は初回描画用です。部分更新ではルートに渡した props で描き直すので、
   リクエストごとに変わるデータは state に持たせてください。
-- Session 型の state はまだ非対応です。上流で予定されているセッション抽象化を待っています。
+- `StorageType::Session` はまだ使えません。usePHP にセッションを差し替える口
+  （SessionInterface）が無く、Laravel のセッションに state を載せられないためです。
+  上流で追加される予定なので、それを待っています。
+- CSRF 対応は暫定です。usePHP にはフォームへ hidden を足すフックが無いため、
+  描画後の HTML に文字列置換で `_token` を差し込んでいます（`CsrfTokenInjector`）。
+  上流にフックが入ったら置き換えます。
 
 Relayer 固有の機能（ファイルベースルーティング、レイアウト、サーバーアクション、
 HTTP キャッシュ、アイランド）は対象外です。Laravel 側に同等のものがあります。

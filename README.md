@@ -112,8 +112,12 @@ runtime must see the project at the same path.
   and deferred components work today.
 - Props are for the first render only; a partial update re-renders with the
   props given to the route, so keep per-request data in state.
-- Session-storage state is not supported yet; it needs the session abstraction
-  planned upstream.
+- `StorageType::Session` does not work yet: usePHP has no session abstraction
+  (SessionInterface) to plug Laravel's session into, so state cannot live
+  there. Upstream plans to add one.
+- CSRF is a stopgap: usePHP has no hook for extra hidden fields, so `_token`
+  is spliced into the rendered HTML by string replacement
+  (`CsrfTokenInjector`). It goes away once upstream offers a hook.
 
 Relayer-specific features (file routing, layouts, server actions, HTTP cache,
 islands) are out of scope: Laravel already has its own.
