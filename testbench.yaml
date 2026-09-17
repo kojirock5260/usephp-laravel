@@ -3,7 +3,8 @@ laravel: '@testbench'
 env:
   - APP_ENV=local
   - APP_DEBUG=true
-  - APP_KEY=base64:+/CnLGnejrn3/p4f1/khG8psA3Pg3KuEvilxrMvTRwE=
+  # sandbox only: base64 of 'usephp-laravel-sandbox-dummy-key', not a secret
+  - APP_KEY=base64:dXNlcGhwLWxhcmF2ZWwtc2FuZGJveC1kdW1teS1rZXk=
 
 providers:
   - Kojirock5260\UsePhpLaravel\UsePhpServiceProvider
