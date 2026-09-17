@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Facade;
 use Kojirock5260\UsePhpLaravel\Psx\ComponentRenderer;
 
 /**
- * @method static string                  render(string $fqcn, array<string, mixed> $props = [])
- * @method static \Polidog\UsePhp\UsePHP  app()
+ * @method static string render(string $fqcn, array<string, mixed> $props = [])
+ * @method static \Polidog\UsePhp\UsePHP app()
  *
  * @see ComponentRenderer
  */

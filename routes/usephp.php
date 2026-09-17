@@ -8,6 +8,6 @@ use Polidog\UsePhp\UsePHP;
 
 // GET /_defer/{name}?prop=value — serves deferred component fragments.
 Route::middleware(config('usephp.defer_middleware', ['web']))
-    ->get(rtrim((string) config('usephp.defer_prefix', '/_defer'), '/') . '/{name}', DeferController::class)
+    ->get(rtrim((string) config('usephp.defer_prefix', '/_defer'), '/').'/{name}', DeferController::class)
     ->where('name', UsePHP::DEFER_NAME_PATTERN)
     ->name('usephp.defer');

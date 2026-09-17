@@ -16,7 +16,7 @@ final class AutoCompiler
 {
     public static function manifestPath(string $cacheDir): string
     {
-        return rtrim($cacheDir, '/') . '/' . CompileCommand::MANIFEST_FILENAME;
+        return rtrim($cacheDir, '/').'/'.CompileCommand::MANIFEST_FILENAME;
     }
 
     /**
@@ -25,14 +25,14 @@ final class AutoCompiler
      */
     public static function compileIfStale(string $componentsDir, string $cacheDir): bool
     {
-        if (!is_dir($componentsDir)) {
+        if (! is_dir($componentsDir)) {
             return false;
         }
 
         $manifest = self::manifestPath($cacheDir);
         $manifestTime = is_file($manifest) ? (filemtime($manifest) ?: 0) : 0;
 
-        if ($manifestTime > 0 && !self::hasNewerSource($componentsDir, $manifestTime)) {
+        if ($manifestTime > 0 && ! self::hasNewerSource($componentsDir, $manifestTime)) {
             return false;
         }
 
@@ -47,8 +47,8 @@ final class AutoCompiler
         // requests stay clean. Failures still surface through the exit code.
         ob_start();
         try {
-            $exitCode = (new CompileCommand())->run(
-                [$componentsDir, '--cache=' . $cacheDir],
+            $exitCode = (new CompileCommand)->run(
+                [$componentsDir, '--cache='.$cacheDir],
                 $componentsDir,
             );
         } finally {

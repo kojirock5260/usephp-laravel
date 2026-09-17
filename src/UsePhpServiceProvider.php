@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Kojirock5260\UsePhpLaravel;
 
 use Illuminate\Contracts\Config\Repository;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Http\Request;
 use Kojirock5260\UsePhpLaravel\Console\CompileCommand;
 use Kojirock5260\UsePhpLaravel\Http\ActionHandler;
 use Kojirock5260\UsePhpLaravel\Psx\AutoCompiler;
@@ -19,13 +19,13 @@ final class UsePhpServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/usephp.php', 'usephp');
+        $this->mergeConfigFrom(__DIR__.'/../config/usephp.php', 'usephp');
 
         $this->app->singleton(UsePHP::class, function (): UsePHP {
             /** @var array{components_path: string, cache_path: string, auto_compile: bool, snapshot_secret: ?string, defer_prefix: string} $config */
             $config = $this->config()->get('usephp');
 
-            $app = (new UsePHP())
+            $app = (new UsePHP)
                 ->disableRouter()               // Laravel owns routing
                 ->setDeferPrefix($config['defer_prefix'])
                 ->setSnapshotSecret($this->snapshotSecret($config));
@@ -50,7 +50,7 @@ final class UsePhpServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        $this->loadRoutesFrom(__DIR__ . '/../routes/usephp.php');
+        $this->loadRoutesFrom(__DIR__.'/../routes/usephp.php');
         $this->registerBlade();
         $this->registerRouteMacro();
 
@@ -58,11 +58,11 @@ final class UsePhpServiceProvider extends ServiceProvider
             $this->commands([CompileCommand::class]);
 
             $this->publishes([
-                __DIR__ . '/../config/usephp.php' => config_path('usephp.php'),
+                __DIR__.'/../config/usephp.php' => config_path('usephp.php'),
             ], 'usephp-config');
 
             $this->publishes([
-                $this->usePhpPackageDir() . '/public/usephp.js' => public_path('vendor/usephp/usephp.js'),
+                $this->usePhpPackageDir().'/public/usephp.js' => public_path('vendor/usephp/usephp.js'),
             ], 'usephp-assets');
         }
     }
@@ -70,12 +70,10 @@ final class UsePhpServiceProvider extends ServiceProvider
     private function registerBlade(): void
     {
         // @usephp(\App\Components\Counter::class, ['initial' => 0])
-        Blade::directive('usephp', static fn (string $expression): string =>
-            "<?php echo app(\\Kojirock5260\\UsePhpLaravel\\Psx\\ComponentRenderer::class)->render({$expression}); ?>");
+        Blade::directive('usephp', static fn (string $expression): string => "<?php echo app(\\Kojirock5260\\UsePhpLaravel\\Psx\\ComponentRenderer::class)->render({$expression}); ?>");
 
         // @usephpScript — loads the published usephp.js (progressive enhancement layer)
-        Blade::directive('usephpScript', static fn (): string =>
-            "<?php echo \\Polidog\\UsePhp\\UsePHP::renderClientScript((string) config('usephp.script_path')); ?>");
+        Blade::directive('usephpScript', static fn (): string => "<?php echo \\Polidog\\UsePhp\\UsePHP::renderClientScript((string) config('usephp.script_path')); ?>");
     }
 
     private function registerRouteMacro(): void
@@ -102,7 +100,7 @@ final class UsePhpServiceProvider extends ServiceProvider
     }
 
     /**
-     * @param array<string, mixed> $config
+     * @param  array<string, mixed>  $config
      */
     private function snapshotSecret(array $config): string
     {

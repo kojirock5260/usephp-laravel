@@ -21,7 +21,7 @@ final class RequestContextFactory
 
         return new RequestContext(
             method: $request->getMethod(),
-            path: '/' . ltrim($request->getPathInfo(), '/'),
+            path: '/'.ltrim($request->getPathInfo(), '/'),
             queryString: $request->getQueryString() ?? '',
             query: $request->query->all(),
             post: $request->request->all(),

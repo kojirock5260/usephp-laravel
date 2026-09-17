@@ -19,17 +19,17 @@ abstract class TestCase extends Orchestra
 
     protected function defineEnvironment($app): void
     {
-        $this->cacheDir = sys_get_temp_dir() . '/usephp-laravel-tests-' . getmypid();
+        $this->cacheDir = sys_get_temp_dir().'/usephp-laravel-tests-'.getmypid();
 
-        $app['config']->set('app.key', 'base64:' . base64_encode(random_bytes(32)));
-        $app['config']->set('usephp.components_path', __DIR__ . '/fixtures/Components');
+        $app['config']->set('app.key', 'base64:'.base64_encode(random_bytes(32)));
+        $app['config']->set('usephp.components_path', __DIR__.'/fixtures/Components');
         $app['config']->set('usephp.cache_path', $this->cacheDir);
         $app['config']->set('usephp.auto_compile', true);
     }
 
     protected function tearDown(): void
     {
-        (new Filesystem())->deleteDirectory($this->cacheDir);
+        (new Filesystem)->deleteDirectory($this->cacheDir);
         parent::tearDown();
     }
 }

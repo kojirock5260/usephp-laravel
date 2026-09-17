@@ -60,6 +60,6 @@ final class RenderTest extends TestCase
     {
         $this->artisan('usephp:compile')->assertExitCode(0);
 
-        $this->assertFileExists($this->cacheDir . '/manifest.php');
+        $this->assertFileExists($this->cacheDir.'/manifest.php');
     }
 }

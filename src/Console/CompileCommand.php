@@ -20,13 +20,13 @@ final class CompileCommand extends Command
         $components = (string) config('usephp.components_path');
         $cache = (string) config('usephp.cache_path');
 
-        $argv = [$components, '--cache=' . $cache];
+        $argv = [$components, '--cache='.$cache];
         foreach (['check', 'clean'] as $flag) {
             if ($this->option($flag)) {
-                $argv[] = '--' . $flag;
+                $argv[] = '--'.$flag;
             }
         }
 
-        return (new UsePhpCompileCommand())->run($argv, $components);
+        return (new UsePhpCompileCommand)->run($argv, $components);
     }
 }

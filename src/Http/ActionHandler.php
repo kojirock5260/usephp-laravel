@@ -30,7 +30,7 @@ final class ActionHandler
     public function __construct(private readonly UsePHP $app) {}
 
     /**
-     * @param array<string, mixed> $props Props the page rendered the component with
+     * @param  array<string, mixed>  $props  Props the page rendered the component with
      */
     public function handle(Request $request, string $fqcn, array $props = []): Response
     {
@@ -38,7 +38,7 @@ final class ActionHandler
         $instanceId = $request->input('_usephp_component');
         $snapshotJson = $request->input('_usephp_snapshot');
 
-        if (!is_string($actionJson) || !is_string($instanceId)) {
+        if (! is_string($actionJson) || ! is_string($instanceId)) {
             return self::reject('Not a usePHP action request');
         }
 
@@ -61,7 +61,7 @@ final class ActionHandler
 
         // A signed snapshot is the only thing tying this request to state the
         // server rendered. Without it a client could bootstrap arbitrary state.
-        if (!is_string($snapshotJson) || $snapshotJson === '') {
+        if (! is_string($snapshotJson) || $snapshotJson === '') {
             return self::reject('Missing snapshot');
         }
 
@@ -88,7 +88,7 @@ final class ActionHandler
 
             $wrapper = self::findWrapper($element, $instanceId);
             if ($wrapper === null) {
-                return self::reject('Component instance not found in ' . $fqcn);
+                return self::reject('Component instance not found in '.$fqcn);
             }
 
             $html = $request->hasHeader('X-UsePHP-Partial')

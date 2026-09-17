@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5'
+          coverage: none
+
+      - run: composer install --no-interaction --prefer-dist
+
+      - name: Code style (Pint)
+        run: vendor/bin/pint --test
+
+      - name: Static analysis (PHPStan)
+        run: vendor/bin/phpstan analyse --no-progress --memory-limit=512M
+
+      - name: Tests
+        run: vendor/bin/phpunit
+
+      - name: Sample components compile
+        run: |
+          vendor/bin/testbench usephp:compile
+          vendor/bin/testbench usephp:compile --check

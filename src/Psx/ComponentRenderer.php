@@ -26,8 +26,8 @@ final class ComponentRenderer
     }
 
     /**
-     * @param class-string|string  $fqcn  e.g. App\Components\Counter
-     * @param array<string, mixed> $props
+     * @param  class-string|string  $fqcn  e.g. App\Components\Counter
+     * @param  array<string, mixed>  $props
      */
     public function render(string $fqcn, array $props = []): string
     {

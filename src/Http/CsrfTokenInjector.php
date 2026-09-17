@@ -16,7 +16,7 @@ final class CsrfTokenInjector
 
     public static function inject(string $html): string
     {
-        if (!str_contains($html, self::FORM_OPEN)) {
+        if (! str_contains($html, self::FORM_OPEN)) {
             return $html;
         }
 
@@ -25,14 +25,14 @@ final class CsrfTokenInjector
             return $html;
         }
 
-        $field = '<input type="hidden" name="_token" value="' . htmlspecialchars($token, ENT_QUOTES, 'UTF-8') . '" />';
+        $field = '<input type="hidden" name="_token" value="'.htmlspecialchars($token, ENT_QUOTES, 'UTF-8').'" />';
 
-        return str_replace(self::FORM_OPEN, self::FORM_OPEN . $field, $html);
+        return str_replace(self::FORM_OPEN, self::FORM_OPEN.$field, $html);
     }
 
     private static function token(): ?string
     {
-        if (!app()->bound('session')) {
+        if (! app()->bound('session')) {
             return null;
         }
 
