@@ -1,0 +1,68 @@
+{
+    "name": "kojirock5260/usephp-laravel",
+    "description": "Laravel bridge for polidog/use-php: render PSX components from routes and Blade",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "kojirock5260",
+            "email": "kojirock5260@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.5",
+        "polidog/use-php": "^0.8.0",
+        "illuminate/support": "^12.0",
+        "illuminate/contracts": "^12.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^10.0",
+        "phpstan/phpstan": "^2.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kojirock5260\\UsePhpLaravel\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Kojirock5260\\UsePhpLaravel\\Tests\\": "tests/",
+            "Workbench\\App\\": "workbench/app/",
+            "Workbench\\Database\\Factories\\": "workbench/database/factories/",
+            "Workbench\\Database\\Seeders\\": "workbench/database/seeders/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Kojirock5260\\UsePhpLaravel\\UsePhpServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "scripts": {
+        "post-autoload-dump": [
+            "@clear",
+            "@prepare"
+        ],
+        "clear": "@php vendor/bin/testbench package:purge-skeleton --ansi",
+        "prepare": "@php vendor/bin/testbench package:discover --ansi",
+        "build": "@php vendor/bin/testbench workbench:build --ansi",
+        "serve": [
+            "Composer\\Config::disableProcessTimeout",
+            "@build",
+            "@php vendor/bin/testbench serve --ansi"
+        ],
+        "lint": [
+            "@php vendor/bin/phpstan analyse --verbose --ansi"
+        ],
+        "test": [
+            "@clear",
+            "@php vendor/bin/phpunit"
+        ]
+    }
+}

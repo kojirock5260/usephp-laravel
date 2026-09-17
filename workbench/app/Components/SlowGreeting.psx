@@ -1,0 +1,13 @@
+<?php
+
+namespace Workbench\App\Components;
+
+use Polidog\UsePhp\Html\H;
+
+return function (array $props) {
+    usleep(800_000);   // pretend this is expensive
+
+    return (
+        <p className="slow">Hello, {$props['name'] ?? 'later'} — rendered at {date('H:i:s')}</p>
+    );
+};

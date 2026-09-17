@@ -1,0 +1,9 @@
+services:
+  sandbox:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    environment:
+      APP_ENV: local

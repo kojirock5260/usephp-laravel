@@ -1,0 +1,14 @@
+<?php
+
+namespace Workbench\App\Components;
+
+use Polidog\UsePhp\Html\H;
+
+return function (array $props) {
+    return (
+        <section className="greeting">
+            <h2>Nested component tag</h2>
+            <Hello name={$props['name'] ?? 'nested'} />
+        </section>
+    );
+};

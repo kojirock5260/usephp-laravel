@@ -1,0 +1,13 @@
+<?php
+
+namespace App\Components;
+
+use Polidog\UsePhp\Html\H;
+
+return function (array $props) {
+    return (
+        <section className="defer-page">
+            <TimeDeferred fallback={<p>loading</p>} when="now" />
+        </section>
+    );
+};

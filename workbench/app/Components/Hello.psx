@@ -1,0 +1,13 @@
+<?php
+
+namespace Workbench\App\Components;
+
+use Polidog\UsePhp\Html\H;
+
+return function (array $props) {
+    $name = $props['name'] ?? 'world';
+
+    return (
+        <p className="hello">Hello, {$name}</p>
+    );
+};

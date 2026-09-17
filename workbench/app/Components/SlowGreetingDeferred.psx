@@ -1,0 +1,13 @@
+<?php
+
+namespace Workbench\App\Components;
+
+use Polidog\UsePhp\Component\Defer;
+use Polidog\UsePhp\Html\H;
+
+use function Polidog\UsePhp\Runtime\fc;
+
+return fc(
+    fn (array $props) => <SlowGreeting name={$props['name'] ?? 'later'} />,
+    defer: new Defer(name: 'slow-greeting', cacheControl: 'private, no-store'),
+);

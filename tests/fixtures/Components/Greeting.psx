@@ -1,0 +1,13 @@
+<?php
+
+namespace App\Components;
+
+use Polidog\UsePhp\Html\H;
+
+return function (array $props) {
+    return (
+        <div className="greeting">
+            <Hello name={$props['name'] ?? 'nested'} />
+        </div>
+    );
+};

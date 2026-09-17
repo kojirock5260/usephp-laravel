@@ -1,0 +1,37 @@
+laravel: '@testbench'
+
+env:
+  - APP_ENV=local
+  - APP_DEBUG=true
+  - APP_KEY=base64:+/CnLGnejrn3/p4f1/khG8psA3Pg3KuEvilxrMvTRwE=
+
+providers:
+  - Kojirock5260\UsePhpLaravel\UsePhpServiceProvider
+  - Workbench\App\Providers\WorkbenchServiceProvider
+
+migrations:
+  - workbench/database/migrations
+
+seeders:
+  - Workbench\Database\Seeders\DatabaseSeeder
+
+workbench:
+  start: '/'
+  install: true
+  health: false
+  discovers:
+    web: true
+    api: false
+    commands: true
+    components: false
+    factories: true
+    views: true
+  build:
+    - create-sqlite-db
+    - db-wipe
+    - migrate-fresh
+  assets: []
+  sync:
+    - from: storage
+      to: workbench/storage
+      reverse: true

@@ -1,0 +1,11 @@
+<?php
+
+namespace App\Components;
+
+use Polidog\UsePhp\Html\H;
+
+return function (array $props) {
+    return (
+        <p className="time">It is {$props['when'] ?? 'unknown'}</p>
+    );
+};

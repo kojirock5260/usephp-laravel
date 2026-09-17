@@ -1,0 +1,13 @@
+<?php
+
+namespace App\Components;
+
+use Polidog\UsePhp\Component\Defer;
+use Polidog\UsePhp\Html\H;
+
+use function Polidog\UsePhp\Runtime\fc;
+
+return fc(
+    fn (array $props) => <Time when={$props['when'] ?? 'unknown'} />,
+    defer: new Defer(name: 'time', cacheControl: 'private, no-store'),
+);

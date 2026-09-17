@@ -1,0 +1,13 @@
+<?php
+
+namespace Workbench\App\Components;
+
+use Polidog\UsePhp\Html\H;
+
+return function (array $props) {
+    return (
+        <div className="defer-demo">
+            <SlowGreetingDeferred fallback={<p className="slow">Loading…</p>} name="deferred" />
+        </div>
+    );
+};
